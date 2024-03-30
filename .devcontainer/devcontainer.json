@@ -43,7 +43,8 @@
   },
 
   "containerEnv": {
-    "PYTHONPATH": "/app"
+    "PYTHONPATH": "/app",
+    "OPENAI_API_KEY": "${localEnv:OPENAI_API_KEY}"
   }
 
   // Features to add to the dev container. More info: https://containers.dev/features
