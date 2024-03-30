@@ -8,10 +8,10 @@ packages = [{include = "langchain_tutorial"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-langchain = "^0.1.13"
+langchain = {extras = ["docarray"], version = "^0.1.13"}
 langchain-openai = "^0.1.1"
 langchainhub = "^0.1.15"
-
+pydantic = "1.10.9"
 
 [build-system]
 requires = ["poetry-core"]
