@@ -17,3 +17,11 @@ Relevant entity information:
 Conversation:
 Human: {input}
 AI:"""
+
+
+# https://www.deeplearning.ai/short-courses/functions-tools-agents-langchain/
+template = """Answer the question based only on the following context:
+{context}
+
+Question: {question}
+"""
