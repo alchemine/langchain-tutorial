@@ -13,8 +13,8 @@
   // The optional 'workspaceFolder' property is the path VS Code should open by default when
   // connected. This is typically a file mount in .devcontainer/docker-compose.yml
   // "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/app,type=bind",
-  "workspaceFolder": "/app",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/langchain,type=bind",
+  "workspaceFolder": "/workspaces/langchain",
 
   // Configure tool-specific properties.
   "customizations": {
@@ -45,7 +45,7 @@
   "containerEnv": {
     "PYTHONPATH": "/app",
     "OPENAI_API_KEY": "${localEnv:OPENAI_API_KEY}"
-  }
+  },
 
   // Features to add to the dev container. More info: https://containers.dev/features
   // "features": {
@@ -56,5 +56,5 @@
   // "forwardPorts": [],
 
   // Uncomment the next line to run commands after the container is created.
-  // "postCreateCommand": "cat /etc/os-release"
+  "postCreateCommand": "poetry install --no-interaction --no-ansi --no-root"
 }

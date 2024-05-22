@@ -1,3 +1,5 @@
+# https://github.com/langchain-ai/langchain/blob/master/libs/langchain/dev.Dockerfile
+
 # This is a Dockerfile for the Development Container
 
 # Use the Python base image
@@ -26,8 +28,8 @@ ENV PATH="$PYTHON_VIRTUALENV_HOME/bin:$PATH" \
 RUN poetry completions bash >> /home/vscode/.bash_completion && \
     echo "export PATH=$PYTHON_VIRTUALENV_HOME/bin:$PATH" >> ~/.bashrc
 
-# # Set the working directory for the app
-# WORKDIR /workspaces/langchain
+# Set the working directory for the app
+WORKDIR /workspaces/langchain
 
 # Use a multi-stage build to install dependencies
 FROM langchain-dev-base AS langchain-dev-dependencies
@@ -35,7 +37,7 @@ FROM langchain-dev-base AS langchain-dev-dependencies
 ARG PYTHON_VIRTUALENV_HOME
 
 # Copy only the dependency files for installation
-COPY pyproject.toml poetry.lock ./
+COPY pyproject.toml poetry.toml poetry.lock ./
 
 # Install the Poetry dependencies (this layer will be cached as long as the dependencies don't change)
-RUN poetry install --no-interaction --no-ansi --no-root
+# RUN poetry install --no-interaction --no-ansi --no-root
