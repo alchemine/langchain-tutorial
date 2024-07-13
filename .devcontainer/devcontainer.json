@@ -1,20 +1,11 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-docker-compose
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
 {
-  // Name for the dev container
-  "name": "langchain",
-
-  // Point to a Docker Compose file
+  "name": "Existing Dockerfile",
   "build": {
     "context": "..",
     "dockerfile": "../Dockerfile"
   },
-
-  // The optional 'workspaceFolder' property is the path VS Code should open by default when
-  // connected. This is typically a file mount in .devcontainer/docker-compose.yml
-  // "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/langchain,type=bind",
-  "workspaceFolder": "/workspaces/langchain",
 
   // Configure tool-specific properties.
   "customizations": {
@@ -26,7 +17,8 @@
         "esbenp.prettier-vscode",
         "ms-python.black-formatter",
         "GitHub.copilot",
-        "donjayamanne.githistory"
+        "donjayamanne.githistory",
+        "eamodio.gitlens"
       ],
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash",
@@ -34,27 +26,35 @@
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "notebook.formatOnSave.enabled": true,
+        "jupyter.notebookFileRoot": "${workspaceFolder}",
         "[python]": {
           "editor.formatOnSave": true,
           "editor.defaultFormatter": "ms-python.black-formatter"
-        }
+        },
+        "files.exclude": {
+          "**/__pycache__": true
+        },
+        "python.testing.pytestEnabled": true,
+        "python.testing.pytestArgs": ["-s", "-vv", "tests"]
       }
     }
   },
 
-  "containerEnv": {
-    "PYTHONPATH": "/app",
-    "OPENAI_API_KEY": "${localEnv:OPENAI_API_KEY}"
-  },
+  "mounts": ["source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind"],
+  "workspaceMount": "source=${localWorkspaceFolder},target=/app,type=bind",
+  "workspaceFolder": "/app",
 
-  // Features to add to the dev container. More info: https://containers.dev/features
-  // "features": {
-  // 	"ghcr.io/devcontainers-contrib/features/poetry:2": {}
-  // }
+  "containerEnv": {
+    "PYTHONPATH": "/app"
+  },
+  "runArgs": ["--env-file", ".env"],
+  "postCreateCommand": "bash .devcontainer/postCreate.sh"
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
 
-  // Uncomment the next line to run commands after the container is created.
-  "postCreateCommand": "poetry install --no-interaction --no-ansi --no-root"
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  // "features": {
+  //   "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  // },
 }
