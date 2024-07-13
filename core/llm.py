@@ -88,5 +88,17 @@ def get_azure_embeddings(configs_emb: dict) -> AzureOpenAIEmbeddings:
 #     return getattr(SINGLETON_MANAGER, key)
 
 
+############################################################
+# Trace chain
+############################################################
+def trace_chain():
+    env["LANGCHAIN_TRACING_V2"] = "true"
+    env["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
+    # os.environ["LANGCHAIN_ENDPOINT"] = "<your-api-key>"
+
+
+############################################################
+# Constants
+############################################################
 CHAT_LLM = get_chat_llm()
 EMBEDDINGS = get_embeddings()
