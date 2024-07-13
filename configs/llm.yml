@@ -1,6 +1,6 @@
-llm:
-  service: azure
+chat_llm:
+  provider: azure
   temperature: 0
 
 embeddings:
-  service: azure
+  provider: azure

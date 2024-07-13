@@ -20,6 +20,7 @@ class SingletonManager:
             cls.instance = super(SingletonManager, cls).__new__(cls)
         return cls.instance
 
+
 SINGLETON_MANAGER = SingletonManager()
 
 
