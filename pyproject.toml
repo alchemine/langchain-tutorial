@@ -14,6 +14,8 @@ langchain-openai = "^0.1.16"
 easydict = "^1.13"
 docarray = "^0.40.0"
 langserve = {extras = ["all"], version = "^0.2.2"}
+faiss-cpu = "^1.8.0.post1"
+langgraph = "^0.1.8"
 
 
 
