@@ -16,6 +16,7 @@ docarray = "^0.40.0"
 langserve = {extras = ["all"], version = "^0.2.2"}
 faiss-cpu = "^1.8.0.post1"
 langgraph = "^0.1.8"
+beautifulsoup4 = "^4.12.3"
 
 
 
